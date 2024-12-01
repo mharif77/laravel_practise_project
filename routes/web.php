@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/dashboard', function () {
-    return view('backend.admin_dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('admin/dashboard', function () {
+//     return view('backend.admin_dashboard');
+// })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -45,6 +45,6 @@ Route::middleware('auth:admin')->prefix('admin')->group( function () {
 
     Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'logout'])->name('admin.logout');
 
-    Route::view('/dashboard','admin.dashboard');
+    Route::view('/dashboard','backend.admin_dashboard');
 
 });
